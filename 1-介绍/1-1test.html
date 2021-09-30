@@ -1,0 +1,42 @@
+<!--
+ * @Description: vue3第一个demo
+ * @Author: chen
+ * @Date: 2021-09-30 10:20:03
+ * @LastEditors: chen
+ * @LastEditTime: 2021-09-30 10:57:46
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="counter">
+    Counter: {{counter}}
+    <!-- counter变量使用 -->
+  </div>
+</body>
+<script>
+  const app = {
+    data () {
+      return {
+        counter: 1
+        // counter变量定义
+      }
+    },
+    mounted () {
+      // 实例被挂载后触发
+      setTimeout(() => {
+        this.counter++
+      }, 1000)
+    }
+  }
+  Vue.createApp(app).mount('#counter')
+  // 创建一个vue实例, 并且挂载到dom元素上
+</script>
+</html>
+
