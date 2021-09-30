@@ -3,7 +3,7 @@
  * @Author: chen
  * @Date: 2021-09-30 10:20:03
  * @LastEditors: chen
- * @LastEditTime: 2021-09-30 10:57:46
+ * @LastEditTime: 2021-09-30 11:06:11
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +18,7 @@
   <div id="counter">
     Counter: {{counter}}
     <!-- counter变量使用 -->
+    <button @click="handleClick">点击我</button>
   </div>
 </body>
 <script>
@@ -28,9 +29,14 @@
         // counter变量定义
       }
     },
+    methods: {
+      handleClick () {
+        clearInterval(this.timer)
+      }
+    },
     mounted () {
       // 实例被挂载后触发
-      setTimeout(() => {
+      this.timer = setInterval(() => {
         this.counter++
       }, 1000)
     }
