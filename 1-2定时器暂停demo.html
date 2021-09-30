@@ -1,0 +1,50 @@
+<!--
+ * @Description: 
+ * @Author: chen
+ * @Date: 2021-09-30 11:19:30
+ * @LastEditors: chen
+ * @LastEditTime: 2021-09-30 11:29:58
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="counter">
+    Counter: {{counter}}
+    <!-- counter变量使用 -->
+    <button @click="handleClick">开启/暂停</button>
+  </div>
+</body>
+<script>
+  const app = {
+    data () {
+      return {
+        counter: 1,
+        isOpen: false
+        // counter变量定义
+      }
+    },
+    methods: {
+      handleClick () {
+        if (this.isOpen) {
+          clearInterval(this.timer)
+          this.isOpen = false
+        } else {
+          this.isOpen = true
+          this.timer = setInterval(() => {
+            this.counter++
+          }, 1000);
+        }
+      }
+    }
+  }
+  Vue.createApp(app).mount('#counter')
+  // 创建一个vue实例, 并且挂载到dom元素上
+</script>
+</html>
