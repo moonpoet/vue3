@@ -1,0 +1,44 @@
+<!--
+ * @Description: vue中的计算属性和watch
+ * @Author: chen
+ * @Date: 2021-09-30 15:30:06
+ * @LastEditors: chen
+ * @LastEditTime: 2021-09-30 16:17:54
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app">
+    {{ some }} world
+  </div>
+</body>
+<script>
+  const vm = Vue.createApp({
+    data () {
+      return {
+        msg: 5
+      }
+    },
+    computed: {
+      some () {
+        return this.msg > 4 ? 'yes' : 'no'
+      }
+    }
+  }).mount('#app')
+
+  console.log(vm, '-----------');
+
+  // 计算属性和方法都是函数, 但是计算属性有缓存, 如果其中所用到的响应式属性没有发生改变, 那么多次访问不会重新求值, 但是方法不一样, 每次执行都会重新求值, 是否需要缓存这就是两者之间的区别
+  // 计算属性是属性, 按照属性来进行使用, 直接使用即可, 后面不需要加上()来进行调用, 但是函数不一样, 函数需要加上()来进行调用
+
+
+  // watch可以用来监听属性的改变, 从而去做一些事情, 但是watch尽量不要滥用, 一般用于执行异步或者是开销较大的操作, 所以适合的时候进行使用
+</script>
+</html>
