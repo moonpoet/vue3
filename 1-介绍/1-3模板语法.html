@@ -1,0 +1,53 @@
+<!--
+ * @Description: 模板语法
+ * @Author: chen
+ * @Date: 2021-09-30 14:15:54
+ * @LastEditors: chen
+ * @LastEditTime: 2021-09-30 14:50:24
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <style>
+    .blue {
+      color: blue;
+      font-size: 18px
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    v-html: <span v-html="msg"></span>
+    <div :id="num">hello world</div>
+    <!-- v-bind 属性绑定 -->
+
+    <div :[some]="str">chen dong</div>
+    <!-- 动态参数绑定 -->
+
+    <button @[event]="handle">click me</button>
+    <!-- 动态事件绑定 -->
+  </div>
+</body>
+<script>
+  Vue.createApp({
+    data () {
+      return {
+        msg: '<span style="color: red">this is should be red</span>', // 动态渲染html
+        num: 666,
+        some: 'class',
+        str: 'blue',
+        event: 'click'
+      }
+    }
+  }).mount('#app')
+
+
+  // 动态参数有一些语法约束, 详情请看vue官网
+  // https://v3.cn.vuejs.org/guide/template-syntax.html#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9
+</script>
+</html>

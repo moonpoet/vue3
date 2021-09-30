@@ -3,7 +3,7 @@
  * @Author: chen
  * @Date: 2021-09-30 10:20:03
  * @LastEditors: chen
- * @LastEditTime: 2021-09-30 11:06:11
+ * @LastEditTime: 2021-09-30 14:10:48
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -38,11 +38,18 @@
       // 实例被挂载后触发
       this.timer = setInterval(() => {
         this.counter++
+        // this就是创建的组件实例, 也就是vm实例
       }, 1000)
     }
   }
-  Vue.createApp(app).mount('#counter')
-  // 创建一个vue实例, 并且挂载到dom元素上
+  const vm = Vue.createApp(app).mount('#counter')
+  // 创建一个vue应用实例, 并且挂载到dom元素上
+
+  console.log(vm);
+  // vm是刚刚所创建的组件实例
+
+
+  // 箭头函数可不能乱用哦
 </script>
 </html>
 
