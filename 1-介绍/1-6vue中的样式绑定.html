@@ -3,7 +3,7 @@
  * @Author: chen
  * @Date: 2021-09-30 16:23:49
  * @LastEditors: chen
- * @LastEditTime: 2021-10-08 10:30:17
+ * @LastEditTime: 2021-10-08 10:51:58
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +25,8 @@
 <body>
   <div id="app">
     <div :class="classObject">some msg</div>
+    <div :class="['active', 'font']">some test message</div>
+    <div :style="{color: 'red', fontSize: '20px'}">使用内联样式</div>
   </div>
 </body>
 <script>
@@ -45,8 +47,14 @@
     }
   }).mount('#app')
 
+  console.log(vm);
+
   // isActive的真假影响active样式的存在与否 && 可以与普通的class共存
 
   // 使用计算属性来构建样式绑定, 通过返回一个对象, 在对象中我们可以做样式的取舍判断, 这是一个常用且强大的功能
+
+  // 其实也可以直接将绑定的样式对象替换classObject, 但是这样也许会造成代码的臃肿, 拆出来会好一点
+
+  // 数组语法, 直接将所需要使用的class样式写在数组内部即可
 </script>
 </html>
