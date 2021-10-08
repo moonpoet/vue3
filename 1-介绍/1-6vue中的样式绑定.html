@@ -1,0 +1,52 @@
+<!--
+ * @Description: vue中的样式绑定
+ * @Author: chen
+ * @Date: 2021-09-30 16:23:49
+ * @LastEditors: chen
+ * @LastEditTime: 2021-10-08 10:30:17
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+  <style>
+    .active {
+      color: red
+    }
+    .font {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div :class="classObject">some msg</div>
+  </div>
+</body>
+<script>
+  const vm = Vue.createApp({
+    data () {
+      return {
+        isActive: true,
+        isEdit: null
+      }
+    },
+    computed: {
+      classObject () {
+        return {
+          active: this.isActive && !this.isEdit,
+          font: !this.isEdit
+        }
+      }
+    }
+  }).mount('#app')
+
+  // isActive的真假影响active样式的存在与否 && 可以与普通的class共存
+
+  // 使用计算属性来构建样式绑定, 通过返回一个对象, 在对象中我们可以做样式的取舍判断, 这是一个常用且强大的功能
+</script>
+</html>
