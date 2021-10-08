@@ -1,0 +1,45 @@
+<!--
+ * @Description: vue中的条件渲染
+ * @Author: chen
+ * @Date: 2021-10-08 10:54:36
+ * @LastEditors: chen
+ * @LastEditTime: 2021-10-08 11:13:23
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="id">
+    {{msg}}
+    <div v-if="isShow">chen</div>
+    <div v-else>dong</div>
+    <div v-show="false">hey</div>
+  </div>
+</body>
+<script>
+  const vm = Vue.createApp({
+    data () {
+      return {
+        msg: 'hello world',
+        isShow: true
+      }
+    }
+  }).mount('#id')
+
+  // template可以作为一个不可见的包裹元素, 用来动态渲染多个元素, 最终的渲染结果将不包含template元素
+
+  // v-show只是隐藏元素, 切换元素的display属性, 但是dom依然存在于dom树中, v-show不支持template元素, 也不支持v-else
+
+  // 不同之处在于v-if是重新渲染或销毁, 而v-show只是简单切换显示与隐藏, v-if有更多的切换开销, v-show有更多的初始渲染开销, 如果需要频繁切换, 那么使用v-show比较好, 如果不需要那么使用v-if更好
+
+  // 不推荐v-if和v-for一起使用
+
+  // v-if如果初始条件为假那么一开始不会进行渲染, 而v-show则不管条件是什么都会进行渲染, 只是渲染后会根据条件进行判断展示与否
+</script>
+</html>
