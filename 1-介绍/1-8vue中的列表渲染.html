@@ -1,0 +1,108 @@
+<!--
+ * @Description: vue中的列表渲染
+ * @Author: chen
+ * @Date: 2021-10-08 11:15:33
+ * @LastEditors: chen
+ * @LastEditTime: 2021-10-08 15:07:03
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- {{msg}} -->
+    <ul>
+      <li v-for="(item, index) in list"  :key="item.age">
+        {{msg}}-{{item.name}}-{{item.age}}-{{index}}
+        <!-- 通过v-for来进行数组的遍历 -->
+        <!-- 使用字符串或者数字类型来做key值 -->
+      </li>
+    </ul>
+    <ul>
+      <li v-for="(value, key, index) in myObject">
+        {{index}}-{{key}}-{{value}}
+        <!-- 通过v-for来进行对象的遍历 -->
+      </li>
+    </ul>
+
+    <button @click="handle">click me</button>
+
+
+    <ul>
+      <li v-for="item in filterList" :key="item.age">
+        {{item.name}}-{{item.age}}
+      </li>
+    </ul>
+
+    <ul>
+      <li v-for="item in change(list)" :key="item.age">
+        {{item.name}}-{{item.age}}
+        <!-- 使用方法在不更改原数组情况下遍历处理后的数组 -->
+      </li>
+    </ul>
+
+    <ul>
+      <li v-for="item in 10" :key="item">{{item}}</li>
+    </ul>
+  </div>
+</body>
+<script>
+  const vm = Vue.createApp({
+    data() {
+      return {
+        msg: 'hello world',
+        list: [
+          {
+            name: 'chen',
+            age: 26
+          },
+          {
+            name: 'wang',
+            age: 28
+          },
+          {
+            name: 'li',
+            age: 30
+          }
+        ],
+        myObject: {
+          title: 'How to do lists in Vue',
+          author: 'Jane Doe',
+          publishedAt: '2016-04-10'
+        }
+      }
+    },
+    computed: {
+      filterList  () {
+        return this.list.filter(item => item.age > 28)
+        // 使用计算属性来显示过滤或者排序后的数组, 之前都是在data中重新定义一个数组, 然后接收数组处理后的值, 现在可以使用计算属性的方式来进行替代
+        // 在计算属性不适用的情况下我们可以使用方法来代替
+      }
+    },
+    methods: {
+      handle () {
+        this.list.pop()
+        console.log(this.list, '-----------');
+      },
+      change (list) {
+        return list.filter(item => item.age > 26)
+      }
+    }
+  }).mount('#app')
+
+  // pop, shift, unshift, push, splice, sort等方式会变更原始数组, vue可以监听到数组的改变, 并同时触发视图的更新, 但是存在一些非变更方法, 如filter, concat, slice等方法会返回一个新数组, 在使用这些方法时我们可以使用新数组来替代旧数组
+
+  // 可以在template中使用v-for, template中可以放置多个元素, 用于遍历多段内容
+
+  // v-for不推荐和v-if一起使用, 因为v-if有更高的优先级, 所以v-if不能访问v-for中的变量(item), 我们可以将v-for提到template元素中, 内部使用v-if去进行判断
+</script>
+
+</html>
