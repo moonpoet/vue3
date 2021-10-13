@@ -1,0 +1,53 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-13 15:08:54
+ * @LastEditTime: 2021-10-13 15:37:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3\1-介绍\1-12在组件上使用v-model.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <custom-input v-model="searchText">
+            something has error
+        </custom-input>
+        {{searchText}}
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                searchText: '666'
+            }
+        }
+    }) // 创建一个vue应用
+    app.component('custom-input', { // 自定义组件名
+        data() {
+            return {
+                count: 0 // 自定义组件数据
+            }
+        },
+        props: ['modelValue'],
+        emits: ['update:modelValue'], // 子组件中抛出的事件需要在emits中定义一下
+        template: `
+          <input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />
+          <slot></slot>
+      `
+    })
+    app.mount('#id')
+    // slot占位插槽
+</script>
+
+</html>
