@@ -1,0 +1,77 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-13 13:55:13
+ * @LastEditTime: 2021-10-13 14:38:42
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3\1-介绍\1-10组件基础.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <div :style="{fontSize: `${fontSize}px`}">
+            <!-- <test-name></test-name>
+            <test-name></test-name>
+            <test-name :subtitle='title'></test-name> -->
+            <!-- 组件使用 -->
+            <!-- 各自维护自己的count 互不影响 -->
+            <!-- 使用props来实现父子组件之间传值 -->
+
+            <test-name v-for="item in posts" :key="item.id" :subtitle="item.title" @large="fontSize +=10"></test-name>
+            <!-- 使用v-bind动态传递属性， 同时遍历组件 -->
+            <!-- 通过$emit来实现子组件向父组件传值 -->
+        </div>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                title: 'this is a test title',
+                posts: [
+                    { id: 1, title: 'My journey with Vue' },
+                    { id: 2, title: 'Blogging with Vue' },
+                    { id: 3, title: 'Why Vue is so fun' }
+                ],
+                fontSize: 2
+            }
+        }
+    }) // 创建一个vue应用
+    app.component('test-name', { // 自定义组件名
+        data() {
+            return {
+                count: 0 // 自定义组件数据
+            }
+        },
+        props: ['subtitle'],
+        emits: ['large'], // 子组件中抛出的事件需要在emits中定义一下
+        template: `
+        <button @click="count++">
+            you click {{count}} times
+        </button>
+
+        <button @click="$emit('large')">
+            enlarge fontsize
+        </button>
+        <h3 v-if="subtitle">{{subtitle}}</h3>
+      `,
+        //   自定义组件模板
+        methods: {},
+        computed: {},
+        watch: {},
+        mounted() { }
+    })
+    app.mount('#id')
+</script>
+
+</html>
