@@ -1,0 +1,57 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-14 10:10:28
+ * @LastEditTime: 2021-10-14 10:18:44
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3\2-深入组件\2-2多个根节点上的属性继承.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <test-name data-status="0" age="26"></test-name>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+      
+    }) // 创建一个vue实例应用
+    app.component('test-name', {
+        data() {
+            return {
+                msg: '组件数据'
+            }
+        },
+        template: `
+          <div>
+            {{msg}}
+            <span>我是一个span</span>
+          </div>
+          <div v-bind="$attrs">
+            我是一个div
+          </div>
+        `,
+        // 如果组件中有多个根元素，那么则不会发生属性继承，我们需要显式的用$attrs来进行绑定
+        mounted () {
+            console.log(this.$attrs, '+++');
+            // $attrs中包含的是props和emits外的所有属性，类似于class，style等
+        }
+    })
+    app.mount('#id')
+
+    
+
+    // 总结一下，如果组件使用时有一些非props属性，而且组件内部只有一个根元素，那么属性会自动继承到组件的根元素上，如果不想继承到根元素上，那么我们可以禁用属性继承，使用$attrs来显式的绑定到你想要绑定的属性上，如果组件有多个根元素，那么我们一定需要显式的用$attrs来进行绑定，不然vue会发出警告
+</script>
+
+</html>

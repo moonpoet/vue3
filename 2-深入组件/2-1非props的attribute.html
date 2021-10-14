@@ -1,0 +1,76 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-14 09:27:39
+ * @LastEditTime: 2021-10-14 10:20:49
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3\2-深入组件\1-非props的attribute.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <test-name data-status="0" age="26"></test-name>
+        <!-- 该data-status属性会被渲染到test-name组件的根元素上面（只有唯一根元素） -->
+
+        <test-age @change="showChange"></test-age>
+        <!-- 如果我们在子组件上监听change事件，而子组件内部的根元素上恰好有change事件，那么我们不需要从子组件内部显式的抛出change事件 -->
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        methods: {
+            showChange ($event) {
+                console.log($event.target.value, '---');
+            }
+        }
+    }) // 创建一个vue实例应用
+    app.component('test-name', {
+        inheritAttrs: false,
+        data() {
+            return {
+                msg: '组件数据'
+            }
+        },
+        template: `
+          <div>
+            {{msg}}
+            <span v-bind="$attrs">我是一个span</span>
+          </div>
+        `,
+        // v-bind绑定一个对象，其实是将这个对象拆分，将所有键值对进行绑定
+        mounted () {
+            console.log(this.$attrs, '+++');
+            // $attrs中包含的是props和emits外的所有属性，类似于class，style等
+        }
+    })
+    app.component('test-age', {
+        data() {
+            return {
+                msg: '组件数据'
+            }
+        },
+        template: `
+            <select>
+                <option value="1">Yesterday</option>
+                <option value="2">Today</option>
+                <option value="3">Tomorrow</option>
+            </select>
+        `,
+        mounted () {
+            console.log(this.$attrs, '*******');
+        }
+    })
+    app.mount('#id')
+</script>
+
+</html>
