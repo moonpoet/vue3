@@ -1,0 +1,63 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-14 10:34:33
+ * @LastEditTime: 2021-10-14 10:44:50
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3\2-深入组件\2-3自定义事件.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <test-name @click-btn="clickMe"></test-name>
+        <h3>{{count}}</h3>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+      data () {
+        return {
+          count: 1
+        }
+      },
+      methods: {
+        clickMe () {
+          this.count++
+        }
+      }
+    }) // 创建一个vue实例应用
+    app.component('test-name', {
+        data() {
+            return {}
+        },
+        emits: {
+          'click-btn'(val) {
+            return !!val
+          }
+          // 验证抛出的事件是否有效，如果验证不通过，vue会抛出警告
+        },
+        template: `
+          <div>
+            <button @click="handleClick">click me</button>
+          </div>
+        `,
+        methods: {
+          handleClick () {
+            this.$emit('click-btn')
+          }
+        }
+    })
+    app.mount('#id')
+</script>
+
+</html>
