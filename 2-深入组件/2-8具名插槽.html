@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-10-14 16:14:16
- * @LastEditTime: 2021-10-14 17:44:37
+ * @LastEditTime: 2021-10-15 09:54:01
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \vue3\2-深入组件\2-8具名插槽.html
@@ -22,6 +22,7 @@
         <test-name>
           <template v-slot:header>
             <!-- 通过设定name属性，将特定的内容插入到插槽内部 -->
+            <!-- v-slot: 可以缩写为# -->
             <h3>我是头部</h3>
           </template>
           <template v-slot:default>
@@ -61,7 +62,9 @@
           </div>
         `
     })
+    // slot有一个name属性，可以将对应的内容插入到插槽处
     app.mount('#id')
+    // v-slot只能被添加到template元素上面，这点要注意，只有一种例外，就是独占默认插槽的缩写语法
 </script>
 
 </html>

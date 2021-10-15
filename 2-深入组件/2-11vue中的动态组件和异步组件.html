@@ -1,0 +1,68 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Author: lhl
+ * @Date: 2021-10-15 10:46:37
+ * @LastEditors: lhl
+ * @LastEditTime: 2021-10-15 13:36:22
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <h3>{{msg}}-{{msg.length}}</h3>
+        <test-name>
+        </test-name>
+        <button @click="msg+='c'">add length</button>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+      data () {
+        return {
+          msg: '我是父级作用域中的数据'
+        }
+      },
+      provide () {
+        return {
+          user: 'chen dong',
+          // length: this.msg.length
+          length: Vue.computed(() => this.msg.length)
+          // 使用Vue.computed来处理响应式数据
+        }
+      }
+    }) // 创建一个vue实例应用
+    app.component('test-name', {
+        data() {
+            return {
+              items: ['red', 'green', 'blue', 'gray', 'purple', 'pink']  
+            }
+        },
+        template: `
+          <div>
+            {{user}}-{{this.length}}
+          </div>
+        `,
+        inject: ['user', 'length'],
+        created () {
+          console.log(this.user, '----------');
+          console.log(this.length, '----------');
+        }
+    })
+    app.mount('#id')
+
+    // vue中的provide&inject一般用于多层组件嵌套，要从父组件中将数据传递到第三次组件或第四次组件嵌套，这里我们用父子组件来做测试
+
+    // provide&inject适用于将父级数据传递到第二级，第三级，第四级组件等，而且可以响应父级数据的改变，但是不能用于子级向父级传递数据
+</script>
+
+</html>
