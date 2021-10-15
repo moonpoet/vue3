@@ -1,0 +1,34 @@
+<!--
+ * @Description: vue中处理边界情况
+ * @Date: 2021-10-15 14:24:49
+ * @LastEditTime: 2021-10-15 14:30:18
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app">
+    
+  </div>
+</body>
+<script>
+  const app = Vue.createApp({
+    
+  })
+  app.component('test-demo', {
+    data () {
+      return {
+        count: 1
+      }
+    }
+  })
+  app.mount('#app')
+  // 强制更新，如果你需要进行强制更新，那么你肯定是在某个地方犯了个错误，如果需要，那我们可以使用this.$forceUpdate
+</script>
+</html>
