@@ -1,0 +1,50 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-14 15:32:49
+ * @LastEditTime: 2021-10-14 16:03:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3\2-深入组件\2-7组件的插槽.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <test-name>
+          我是组件内部的插槽数据{{msg}}
+        </test-name>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+      data () {
+        return {
+          msg: '我是父级作用域中的数据'
+        }
+      }
+    }) // 创建一个vue实例应用
+    app.component('test-name', {
+        data() {
+            return {
+               
+            }
+        },
+        template: `
+          <div>
+            <slot>我是插槽中的备用内容</slot>
+          </div>
+        `
+    })
+    app.mount('#id')
+</script>
+
+</html>

@@ -1,0 +1,67 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-10-14 16:14:16
+ * @LastEditTime: 2021-10-14 17:44:37
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \vue3\2-深入组件\2-8具名插槽.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+
+<body>
+    <div id="id">
+        <test-name>
+          <template v-slot:header>
+            <!-- 通过设定name属性，将特定的内容插入到插槽内部 -->
+            <h3>我是头部</h3>
+          </template>
+          <template v-slot:default>
+            <h3>我是主体</h3>
+          </template>
+          <template v-slot:footer>
+            <h3>我是尾部</h3>
+          </template>
+        </test-name>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+      data () {
+        return {
+          msg: '我是父级作用域中的数据'
+        }
+      }
+    }) // 创建一个vue实例应用
+    app.component('test-name', {
+        data() {
+            return {
+               
+            }
+        },
+        template: `
+          <div>
+            <header>
+              <slot name="header"></slot>
+            </header>
+            <main>
+              <slot></slot>
+            </main>
+            <footer>
+              <slot name="footer"></slot>
+            </footer>
+          </div>
+        `
+    })
+    app.mount('#id')
+</script>
+
+</html>
