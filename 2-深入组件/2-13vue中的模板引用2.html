@@ -1,0 +1,49 @@
+<!--
+ * @Description: 模板引用
+ * @Date: 2021-10-15 14:14:52
+ * @LastEditTime: 2021-10-15 14:20:26
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app">
+    <test-demo ref="test"></test-demo>
+    <button @click="handle">add me</button>
+  </div>
+</body>
+<script>
+  const app = Vue.createApp({
+    methods: {
+      handle () {
+        console.log(this.$refs, '-----------');
+        console.log(this.$refs.test, '+++++++++');
+        this.$refs.test.add()
+        // 通过ref拿到子组件实例，从而可以实现在父组件中调用子组件中的方法
+      }
+    }
+  })
+  app.component('test-demo', {
+    data () {
+      return {
+        count: 1
+      }
+    },
+    template: `
+      <input v-model="count" />
+    `,
+    methods: {
+      add () {
+        this.count++
+      }
+    }
+  })
+  app.mount('#app')
+</script>
+</html>

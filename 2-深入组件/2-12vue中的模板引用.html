@@ -1,0 +1,33 @@
+<!--
+ * @Description: 模板引用
+ * @Date: 2021-10-15 14:03:35
+ * @LastEditTime: 2021-10-15 14:14:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" ref="input" />
+  </div>
+</body>
+<script>
+  const app = Vue.createApp({
+    mounted () {
+      // console.log(this.$refs);
+      // this.$refs.input.focus()
+
+      const {input} = this.$refs
+      console.log(input, '+++++');
+      input.focus()
+      // 这是对象的解构语法，两种方式均可
+    }
+  }).mount('#app')
+</script>
+</html>
