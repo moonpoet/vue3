@@ -1,0 +1,44 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Author: lhl
+ * @Date: 2021-10-22 16:59:00
+ * @LastEditors: lhl
+ * @LastEditTime: 2021-10-25 09:41:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-focus />
+    <br>
+    <input type="text" v-focus />
+  </div>
+</body>
+<script>
+  const app = Vue.createApp({
+    data () {
+      return {
+        
+      }
+    },
+    methods: {
+      
+    }
+  })
+  app.directive('focus', {
+    mounted (el) {
+      console.log(el, '------------------------------------');
+      el.focus()
+    }
+  })
+  app.mount('#app')
+</script>
+</html>

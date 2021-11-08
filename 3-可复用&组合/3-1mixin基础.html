@@ -1,0 +1,65 @@
+<!--
+ * @Description: 
+ * @Version: 2.0
+ * @Author: lhl
+ * @Date: 2021-10-22 16:28:47
+ * @LastEditors: lhl
+ * @LastEditTime: 2021-10-22 16:57:08
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- {{msg}} world
+    <button @click="handle">click me</button> -->
+  </div>
+</body>
+<script>
+  const myMixin = {
+    data () {
+      return {
+        message: 'hello',
+        // foo: 'abc'
+      }
+    },
+    methods: {
+      foo () {
+        console.log('来自于mixin');
+      }
+    },
+    created () {
+      // console.log('mixin中的钩子函数被调用');
+    }
+  }
+  const vm = Vue.createApp({
+    mixins: [myMixin],
+    data () {
+      return {
+        message: 'goodbye',
+        bar: 'def'
+      }
+    },
+    methods: {
+      foo () {
+        console.log('来自于组件');
+      }
+    },
+    created () {
+      // console.log('组件中的钩子函数被调用');
+      // console.log(this,'----------');
+    }
+  }).mount('#app')
+  vm.foo()
+  console.log(vm, '---------');
+  // 混入如果有同名选项时，都会被调用，然后将结果进行合并，如果有冲突以组件自身数据优先
+  // 同名钩子函数都会执行，但是mixin中的钩子函数先执行，组件中的钩子函数后执行
+  // 代码复用和抽象的主要形式是组件
+</script>
+</html>
